@@ -44,3 +44,38 @@ export { Prisma }
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model Cinema
+ * 
+ */
+export type Cinema = Prisma.CinemaModel
+/**
+ * Model Sala
+ * 
+ */
+export type Sala = Prisma.SalaModel
+/**
+ * Model Filme
+ * 
+ */
+export type Filme = Prisma.FilmeModel
+/**
+ * Model Sessao
+ * 
+ */
+export type Sessao = Prisma.SessaoModel
+/**
+ * Model Ingresso
+ * 
+ */
+export type Ingresso = Prisma.IngressoModel
+/**
+ * Model Pedido
+ * 
+ */
+export type Pedido = Prisma.PedidoModel
+/**
+ * Model LancheCombo
+ * 
+ */
+export type LancheCombo = Prisma.LancheComboModel

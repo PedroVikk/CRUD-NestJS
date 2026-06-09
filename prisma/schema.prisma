@@ -16,3 +16,91 @@ model User {
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt
 }
+
+enum Genero {
+  ACAO
+  COMEDIA
+  DRAMA
+  TERROR
+  FICCAO
+  ROMANCE
+  ANIMACAO
+  DOCUMENTARIO
+  OUTRO
+}
+
+model Cinema {
+  id       Int      @id @default(autoincrement())
+  nome     String
+  endereco String
+  salas    Sala[]
+  filmes   Filme[]
+  sessoes  Sessao[]
+}
+
+model Sala {
+  id         Int      @id @default(autoincrement())
+  numero     Int
+  capacidade Int
+  poltronas  Json
+  cinema     Cinema   @relation(fields: [cinemaId], references: [id])
+  cinemaId   Int
+  sessoes    Sessao[]
+}
+
+model Filme {
+  id                 Int      @id @default(autoincrement())
+  titulo             String
+  sinopse            String
+  classificacao      String
+  duracao            DateTime
+  elenco             String
+  genero             Genero
+  dataInicioExibicao DateTime
+  dataFinalExibicao  DateTime
+  cinema             Cinema   @relation(fields: [cinemaId], references: [id])
+  cinemaId           Int
+  sessoes            Sessao[]
+}
+
+model Sessao {
+  id              Int        @id @default(autoincrement())
+  horarioExibicao DateTime
+  filme           Filme      @relation(fields: [filmeId], references: [id])
+  filmeId         Int
+  sala            Sala       @relation(fields: [salaId], references: [id])
+  salaId          Int
+  cinema          Cinema     @relation(fields: [cinemaId], references: [id])
+  cinemaId        Int
+  ingressos       Ingresso[]
+}
+
+model Ingresso {
+  id           Int     @id @default(autoincrement())
+  valorInteira Float
+  valorMeia    Float
+  sessao       Sessao  @relation(fields: [sessaoId], references: [id])
+  sessaoId     Int
+  pedido       Pedido? @relation(fields: [pedidoId], references: [id])
+  pedidoId     Int?
+}
+
+model Pedido {
+  id         Int           @id @default(autoincrement())
+  qtInteira  Int
+  qtMeia     Int
+  valorTotal Float
+  ingressos  Ingresso[]
+  lanches    LancheCombo[]
+}
+
+model LancheCombo {
+  id            Int     @id @default(autoincrement())
+  nome          String
+  descricao     String
+  valorUnitario Float
+  qtUnidade     Int
+  subtotal      Float
+  pedido        Pedido? @relation(fields: [pedidoId], references: [id])
+  pedidoId      Int?
+}
