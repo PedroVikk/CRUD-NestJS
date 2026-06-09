@@ -1,12 +1,12 @@
 # CRUD de Usuários - NestJS + Prisma
 
-API REST de cadastro de usuários (CRUD) feita com **NestJS**, **Prisma ORM** e banco **SQLite**, com validação de dados e documentação via **Swagger**.
+API REST de cadastro de usuários (CRUD) feita com **NestJS**, **Prisma ORM** e banco **PostgreSQL**, com validação de dados e documentação via **Swagger**.
 
 ## Tecnologias
 
 - NestJS
 - Prisma ORM
-- SQLite
+- PostgreSQL
 - class-validator / class-transformer
 - Swagger (OpenAPI)
 
@@ -45,11 +45,16 @@ prisma/
 # 1. Instalar dependências
 npm install
 
-# 2. Gerar o client do Prisma e aplicar a migration
+# 2. Configurar o banco
+#    Copie .env.example para .env e ajuste a DATABASE_URL com as
+#    credenciais do seu PostgreSQL, ex:
+#    postgresql://usuario:senha@localhost:5432/DBdev?schema=public
+
+# 3. Gerar o client do Prisma e aplicar a migration
 npx prisma generate
 npx prisma migrate dev
 
-# 3. Subir a aplicação
+# 4. Subir a aplicação
 npm run start:dev
 ```
 

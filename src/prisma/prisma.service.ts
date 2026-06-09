@@ -1,14 +1,14 @@
 import 'dotenv/config';
 import { Injectable } from '@nestjs/common';
-import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
+import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '../generated/prisma/client';
 
 @Injectable()
 export class PrismaService extends PrismaClient {
   constructor() {
-    const url = process.env.DATABASE_URL;
-    if (!url) throw new Error('DATABASE_URL não definida');
-    const adapter = new PrismaBetterSqlite3({ url });
+    const connectionString = process.env.DATABASE_URL;
+    if (!connectionString) throw new Error('DATABASE_URL não definida');
+    const adapter = new PrismaPg({ connectionString });
     super({ adapter });
   }
 }
